@@ -1,0 +1,140 @@
+name: Deploy GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    outputs:
+      source_sha: ${{ steps.source.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore initial source payload when present
+        shell: python
+        run: |
+          import hashlib, io, json, lzma, pathlib, shutil, tarfile
+          root = pathlib.Path('.bootstrap')
+          if root.is_dir():
+              manifest = json.loads((root / 'manifest.json').read_text())
+              payload = b''.join((root / name).read_bytes() for name in manifest['parts'])
+              assert hashlib.sha256(payload).hexdigest() == manifest['sha256']
+              with tarfile.open(fileobj=io.BytesIO(lzma.decompress(payload)), mode='r:') as archive:
+                  members = archive.getmembers()
+                  assert len(members) == manifest['sourceFileCount']
+                  for member in members:
+                      path = pathlib.PurePosixPath(member.name)
+                      assert member.isfile() and not path.is_absolute() and '..' not in path.parts
+                      assert path.parts[0] not in ('.git', '.github', '.bootstrap', '.data', 'node_modules')
+                  archive.extractall('.', filter='data')
+              shutil.rmtree(root)
+      - name: Commit restored source files
+        id: source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --all
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat: restore complete Stratum FX studio and standalone libraries'
+            git push origin HEAD:main
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          git log -1 --format='SOURCE_COMMIT=%H%nSOURCE_TREE=%T'
+          git ls-remote origin refs/heads/main
+      - name: Check source and run Node tests
+        run: |
+          npm run check | tee artifacts/syntax-check.txt
+          npm test | tee artifacts/node-tests.txt
+      - name: Install browser test tools
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Test editor over HTTP with real module worker
+        env:
+          STRATUM_TEST_SOFTWARE: '1'
+          STRATUM_TEST_URL: http://127.0.0.1:4173/app/?fresh=1
+        run: |
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > /tmp/stratum-http.log 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for i in {1..20}; do curl -fsS http://127.0.0.1:4173/app/ > /dev/null && break; sleep 1; done
+          python tests/browser-smoke.py | tee artifacts/browser-log.txt
+          cp artifacts/studio-preview.png site/studio-preview.png
+          cp artifacts/studio-preview.png dist/site/studio-preview.png
+          python tests/examples-smoke.py | tee artifacts/examples-log.txt
+      - name: Build distributable downloads and verify site links
+        run: |
+          npm run pack:all | tee artifacts/package-build.txt
+          python scripts/release.py --site-download
+          python scripts/verify-site.py | tee artifacts/site-links.json
+      - name: Commit generated preview and validation reports
+        run: |
+          git add artifacts/ site/studio-preview.png
+          if ! git diff --cached --quiet; then
+            git commit -m 'test: qualify editor and website on GitHub Actions'
+            git push origin HEAD:main
+          fi
+          git log -1 --format='VALIDATED_COMMIT=%H%nVALIDATED_TREE=%T'
+      - name: Preserve browser diagnostics
+        if: failure()
+        run: |
+          sed -n '1,300p' tests/browser-smoke.py
+          cat /tmp/stratum-http.log || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stratum-fx-validation
+          path: artifacts/
+          retention-days: 14
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Publish site
+        id: deployment
+        uses: actions/deploy-pages@v4
+  verify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      PAGE_URL: ${{ needs.deploy.outputs.page_url }}
+    steps:
+      - name: Verify public website and downloads
+        run: |
+          base="${PAGE_URL%/}"
+          for path in / /app/ /docs/guide.html /StratumFX.html /site/studio-preview.png /packages/core/src/cook-worker.js /downloads/stratum-fx-source.zip /downloads/stratum-fx-geometry-0.1.0.tgz /downloads/stratum-fx-core-0.1.0.tgz /downloads/stratum-fx-renderer-0.1.0.tgz /downloads/stratum-fx-controls-0.1.0.tgz /downloads/stratum-fx-collaboration-0.1.0.tgz; do
+            curl --fail --silent --show-error --retry 8 --retry-all-errors --retry-delay 5 --output /dev/null "$base$path"
+            echo "HTTP OK: $base$path"
+          done
