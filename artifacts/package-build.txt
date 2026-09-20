@@ -1,0 +1,128 @@
+
+> stratum-fx-workspace@0.1.0 pack:all
+> node scripts/pack.js
+
+npm notice
+npm notice package: @stratum-fx/geometry@0.1.0
+npm notice Tarball Contents
+npm notice 1.1kB LICENSE
+npm notice 1.7kB README.md
+npm notice 36.4kB dist/index.js
+npm notice 34.8kB dist/standalone.js
+npm notice 738B package.json
+npm notice 547B src/index.js
+npm notice 4.9kB src/math.js
+npm notice 14.2kB src/mesh.js
+npm notice 5.1kB src/primitives.js
+npm notice 8.4kB src/simulation.js
+npm notice 5.7kB types/index.d.ts
+npm notice Tarball Details
+npm notice name: @stratum-fx/geometry
+npm notice version: 0.1.0
+npm notice filename: stratum-fx-geometry-0.1.0.tgz
+npm notice package size: 30.8 kB
+npm notice unpacked size: 113.6 kB
+npm notice shasum: 65cf7a8be88088b1d5519fb1c5037d756961fdb5
+npm notice integrity: sha512-mk1wbalqFmd42[...]XVmPLhUC5xPKQ==
+npm notice total files: 11
+npm notice
+stratum-fx-geometry-0.1.0.tgz
+npm notice
+npm notice package: @stratum-fx/core@0.1.0
+npm notice Tarball Contents
+npm notice 1.1kB LICENSE
+npm notice 1.7kB README.md
+npm notice 64.6kB dist/index.js
+npm notice 64.0kB dist/standalone.js
+npm notice 63.8kB dist/worker.js
+npm notice 778B package.json
+npm notice 547B src/cook-worker.js
+npm notice 4.7kB src/expression.js
+npm notice 15.4kB src/graph.js
+npm notice 294B src/index.js
+npm notice 10.1kB src/nodes.js
+npm notice 4.4kB types/index.d.ts
+npm notice Tarball Details
+npm notice name: @stratum-fx/core
+npm notice version: 0.1.0
+npm notice filename: stratum-fx-core-0.1.0.tgz
+npm notice package size: 61.7 kB
+npm notice unpacked size: 231.3 kB
+npm notice shasum: 7e3884abb218b36d505be9bb085ced0b57275c3d
+npm notice integrity: sha512-LXnVvn71WmK1Z[...]WLz481F2X0BbQ==
+npm notice total files: 12
+npm notice
+stratum-fx-core-0.1.0.tgz
+npm notice
+npm notice package: @stratum-fx/renderer@0.1.0
+npm notice Tarball Contents
+npm notice 1.1kB LICENSE
+npm notice 1.7kB README.md
+npm notice 68.4kB dist/index.js
+npm notice 68.2kB dist/standalone.js
+npm notice 734B package.json
+npm notice 3.7kB src/bvh.js
+npm notice 172B src/index.js
+npm notice 21.0kB src/renderer.js
+npm notice 7.1kB src/shaders.js
+npm notice 11.3kB src/software.js
+npm notice 2.9kB types/index.d.ts
+npm notice Tarball Details
+npm notice name: @stratum-fx/renderer
+npm notice version: 0.1.0
+npm notice filename: stratum-fx-renderer-0.1.0.tgz
+npm notice package size: 46.9 kB
+npm notice unpacked size: 186.3 kB
+npm notice shasum: 07ceb3b76c2736196f6247d769f5060d194c0c87
+npm notice integrity: sha512-OGisHAtEMEJYN[...]PQ1ArhxNuuRGA==
+npm notice total files: 11
+npm notice
+stratum-fx-renderer-0.1.0.tgz
+npm notice
+npm notice package: @stratum-fx/controls@0.1.0
+npm notice Tarball Contents
+npm notice 1.1kB LICENSE
+npm notice 1.7kB README.md
+npm notice 28.1kB dist/index.js
+npm notice 28.0kB dist/standalone.js
+npm notice 728B package.json
+npm notice 162B src/index.js
+npm notice 14.5kB src/node-editor.js
+npm notice 7.4kB src/parameter-editor.js
+npm notice 5.4kB src/timeline.js
+npm notice 1.7kB types/index.d.ts
+npm notice Tarball Details
+npm notice name: @stratum-fx/controls
+npm notice version: 0.1.0
+npm notice filename: stratum-fx-controls-0.1.0.tgz
+npm notice package size: 13.7 kB
+npm notice unpacked size: 88.9 kB
+npm notice shasum: 1af9111716fb9e48633b9ce5f8941bb8b83aecc5
+npm notice integrity: sha512-UgGFGzb6ue+YJ[...]AVhcEsxKmjDfw==
+npm notice total files: 10
+npm notice
+stratum-fx-controls-0.1.0.tgz
+npm notice
+npm notice package: @stratum-fx/collaboration@0.1.0
+npm notice Tarball Contents
+npm notice 1.1kB LICENSE
+npm notice 1.7kB README.md
+npm notice 75.8kB dist/index.js
+npm notice 75.8kB dist/standalone.js
+npm notice 735B package.json
+npm notice 9.9kB src/client.js
+npm notice 99B src/index.js
+npm notice 2.3kB src/storage.js
+npm notice 2.4kB types/index.d.ts
+npm notice Tarball Details
+npm notice name: @stratum-fx/collaboration
+npm notice version: 0.1.0
+npm notice filename: stratum-fx-collaboration-0.1.0.tgz
+npm notice package size: 46.9 kB
+npm notice unpacked size: 169.9 kB
+npm notice shasum: 4ac9dc3d4d306539e4deba32965e267d03b14653
+npm notice integrity: sha512-ME/6h3npPrlc3[...]JSTO2or+Df89g==
+npm notice total files: 9
+npm notice
+stratum-fx-collaboration-0.1.0.tgz
+Five local-installable archives written to artifacts/packages and dist/downloads.

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "id": "1ed75873-ad70-412b-aef5-37aa1136472d",
+  "title": "Basalt Garden",
+  "nodes": [
+    {
+      "id": "height",
+      "type": "terrain",
+      "name": "island_heightfield",
+      "x": 0,
+      "y": 10,
+      "inputs": [],
+      "params": {
+        "size": 10.5,
+        "resolution": 54,
+        "height": 2.3,
+        "frequency": 0.45,
+        "octaves": 5,
+        "seed": 31,
+        "island": true
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "scatter",
+      "type": "scatter",
+      "name": "surface_scatter",
+      "x": 235,
+      "y": 10,
+      "inputs": [
+        "height"
+      ],
+      "params": {
+        "count": 1000,
+        "seed": 21,
+        "minHeight": -0.24
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "column",
+      "type": "cylinder",
+      "name": "hexagonal_column",
+      "x": 0,
+      "y": 115,
+      "inputs": [],
+      "params": {
+        "radius": 0.14,
+        "topRadius": 0.14,
+        "height": 1.7,
+        "segments": 6
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "material",
+      "type": "color",
+      "name": "oxidized_alloy",
+      "x": 235,
+      "y": 115,
+      "inputs": [
+        "column"
+      ],
+      "params": {
+        "color": "#315951",
+        "secondary": "#e1c28b",
+        "mode": "height",
+        "roughness": 0.38,
+        "metallic": 0.5
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "copy",
+      "type": "copy",
+      "name": "instance_columns",
+      "x": 470,
+      "y": 65,
+      "inputs": [
+        "material",
+        "scatter"
+      ],
+      "params": {
+        "scale": 1,
+        "variation": 0.67,
+        "seed": 16,
+        "rotate": true
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "name": "OUT_GARDEN",
+      "x": 705,
+      "y": 65,
+      "inputs": [
+        "copy"
+      ],
+      "params": {},
+      "keyframes": {},
+      "bypass": false
+    }
+  ],
+  "outputId": "out",
+  "start": 1,
+  "end": 240,
+  "fps": 24
+}

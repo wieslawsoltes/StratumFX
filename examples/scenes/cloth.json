@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "id": "8f2aac46-0750-400d-8b05-68998cfcfee3",
+  "title": "Wind / Cloth Study",
+  "nodes": [
+    {
+      "id": "cloth",
+      "type": "cloth",
+      "name": "cloth_constraints",
+      "x": 40,
+      "y": 20,
+      "inputs": [],
+      "params": {
+        "resolution": 20,
+        "width": 5,
+        "height": 4,
+        "wind": 5,
+        "gravity": 9.81,
+        "damping": 0.99,
+        "iterations": 7,
+        "collider": 1.2
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "fabric",
+      "type": "color",
+      "name": "woven_copper",
+      "x": 40,
+      "y": 130,
+      "inputs": [
+        "cloth"
+      ],
+      "params": {
+        "color": "#b87650",
+        "secondary": "#d0a377",
+        "mode": "height",
+        "roughness": 0.65,
+        "metallic": 0.15
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "sphere",
+      "type": "sphere",
+      "name": "collision_sphere",
+      "x": 300,
+      "y": 20,
+      "inputs": [],
+      "params": {
+        "radius": 1.2,
+        "segments": 32,
+        "rings": 24
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "move",
+      "type": "transform",
+      "name": "collider_position",
+      "x": 300,
+      "y": 130,
+      "inputs": [
+        "sphere"
+      ],
+      "params": {
+        "translate": [
+          0,
+          1.6,
+          0.75
+        ],
+        "rotate": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "merge",
+      "type": "merge",
+      "name": "cloth_and_collider",
+      "x": 170,
+      "y": 240,
+      "inputs": [
+        "fabric",
+        "move"
+      ],
+      "params": {},
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "name": "OUT_CLOTH",
+      "x": 170,
+      "y": 350,
+      "inputs": [
+        "merge"
+      ],
+      "params": {},
+      "keyframes": {},
+      "bypass": false
+    }
+  ],
+  "outputId": "out",
+  "start": 1,
+  "end": 240,
+  "fps": 24
+}

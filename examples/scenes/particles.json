@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "448af5d0-dac3-46d2-80af-90630c05b653",
+  "title": "Particle Fountain",
+  "nodes": [
+    {
+      "id": "particles",
+      "type": "particles",
+      "name": "ballistic_emitter",
+      "x": 130,
+      "y": 30,
+      "inputs": [],
+      "params": {
+        "count": 2000,
+        "seed": 8,
+        "speed": 8,
+        "spread": 1.4,
+        "gravity": 9.81,
+        "lifetime": 2.8,
+        "size": 0.045
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "name": "OUT_PARTICLES",
+      "x": 130,
+      "y": 150,
+      "inputs": [
+        "particles"
+      ],
+      "params": {},
+      "keyframes": {},
+      "bypass": false
+    }
+  ],
+  "outputId": "out",
+  "start": 1,
+  "end": 240,
+  "fps": 24
+}

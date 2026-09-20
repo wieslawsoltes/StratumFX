@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "id": "a095c61f-727f-484c-b816-fc1554a52cfb",
+  "title": "Kinetic Lattice",
+  "nodes": [
+    {
+      "id": "grid",
+      "type": "grid",
+      "name": "lattice_points",
+      "x": 50,
+      "y": 20,
+      "inputs": [],
+      "params": {
+        "width": 9,
+        "depth": 9,
+        "rows": 13,
+        "columns": 13
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "wave",
+      "type": "wrangle",
+      "name": "wave_field",
+      "x": 50,
+      "y": 130,
+      "inputs": [
+        "grid"
+      ],
+      "params": {
+        "x": "x",
+        "y": "sin(x * 0.7 + t) * cos(z * 0.7 + t * 0.5) * 1.4 + 2",
+        "z": "z"
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "torus",
+      "type": "torus",
+      "name": "ring_element",
+      "x": 300,
+      "y": 20,
+      "inputs": [],
+      "params": {
+        "radius": 0.22,
+        "tube": 0.065,
+        "segments": 28,
+        "sides": 10
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "mat",
+      "type": "color",
+      "name": "brushed_gold",
+      "x": 300,
+      "y": 130,
+      "inputs": [
+        "torus"
+      ],
+      "params": {
+        "color": "#d2a569",
+        "secondary": "#eee2c4",
+        "mode": "solid",
+        "roughness": 0.3,
+        "metallic": 0.72
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "copy",
+      "type": "copy",
+      "name": "ring_lattice",
+      "x": 175,
+      "y": 240,
+      "inputs": [
+        "mat",
+        "wave"
+      ],
+      "params": {
+        "scale": 1,
+        "variation": 0.16,
+        "seed": 13,
+        "rotate": true
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "name": "OUT_LATTICE",
+      "x": 175,
+      "y": 345,
+      "inputs": [
+        "copy"
+      ],
+      "params": {},
+      "keyframes": {},
+      "bypass": false
+    }
+  ],
+  "outputId": "out",
+  "start": 1,
+  "end": 240,
+  "fps": 24
+}

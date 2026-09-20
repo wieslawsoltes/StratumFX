@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "test": "engine example initializes from independent package bundles",
+      "pass": true
+    },
+    {
+      "test": "Standalone core reuses cached graph output",
+      "pass": true
+    },
+    {
+      "test": "engine desktop example has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "test": "renderer example initializes from independent package bundles",
+      "pass": true
+    },
+    {
+      "test": "Standalone renderer handles cross-package instancing and shading controls",
+      "pass": true
+    },
+    {
+      "test": "renderer desktop example has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "test": "controls example initializes from independent package bundles",
+      "pass": true
+    },
+    {
+      "test": "Standalone controls host adds nodes, undoes and scrubs timeline",
+      "pass": true
+    },
+    {
+      "test": "controls desktop example has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "test": "Landing page renders actual image assets without desktop overflow",
+      "pass": true
+    },
+    {
+      "test": "Landing page has no horizontal overflow at 390px",
+      "pass": true
+    },
+    {
+      "test": "Guide renders without mobile horizontal overflow",
+      "pass": true
+    }
+  ],
+  "passed": 12,
+  "pageErrors": [],
+  "mode": "inline local assets",
+  "gpuQualified": false
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "2d08466c-6fa4-4b2a-a0a1-e34f1579b29d",
+  "title": "Rigid Rain",
+  "nodes": [
+    {
+      "id": "bodies",
+      "type": "rigid",
+      "name": "sphere_dynamics",
+      "x": 130,
+      "y": 30,
+      "inputs": [],
+      "params": {
+        "count": 95,
+        "seed": 31,
+        "radius": 0.22,
+        "gravity": 9.81,
+        "restitution": 0.54
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "mat",
+      "type": "color",
+      "name": "anodized_bodies",
+      "x": 130,
+      "y": 150,
+      "inputs": [
+        "bodies"
+      ],
+      "params": {
+        "color": "#93b8bb",
+        "secondary": "#eee2c4",
+        "mode": "solid",
+        "roughness": 0.27,
+        "metallic": 0.7
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "name": "OUT_DYNAMICS",
+      "x": 130,
+      "y": 270,
+      "inputs": [
+        "mat"
+      ],
+      "params": {},
+      "keyframes": {},
+      "bypass": false
+    }
+  ],
+  "outputId": "out",
+  "start": 1,
+  "end": 240,
+  "fps": 24
+}

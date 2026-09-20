@@ -1,0 +1,5 @@
+
+> stratum-fx-workspace@0.1.0 check
+> node scripts/check.js
+
+36 JavaScript source files passed syntax checking.

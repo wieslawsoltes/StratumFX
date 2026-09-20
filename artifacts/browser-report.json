@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "test": "Initial procedural scene cooks through the worker",
+      "pass": true
+    },
+    {
+      "test": "Renderer canvas contains actual nonuniform pixels",
+      "pass": true
+    },
+    {
+      "test": "Scene graph selection populates the parameter editor",
+      "pass": true
+    },
+    {
+      "test": "Parameter edit updates the procedural document",
+      "pass": true
+    },
+    {
+      "test": "Keyboard undo reverses parameter edit",
+      "pass": true
+    },
+    {
+      "test": "Keyboard redo reapplies parameter edit",
+      "pass": true
+    },
+    {
+      "test": "Shelf creates a real primitive node",
+      "pass": true
+    },
+    {
+      "test": "Keyframed inspector edits auto-key and interpolate geometry",
+      "pass": true
+    },
+    {
+      "test": "Inspector displays the evaluated animation value",
+      "pass": true
+    },
+    {
+      "test": "Shift-click removes the current keyframe",
+      "pass": true
+    },
+    {
+      "test": "Animation editor lists actual keyed channels",
+      "pass": true
+    },
+    {
+      "test": "Command palette adds and wires a transform",
+      "pass": true
+    },
+    {
+      "test": "Frame-dependent transform expression changes actual bounds",
+      "pass": true
+    },
+    {
+      "test": "Pointer drag moves graph nodes and commits coordinates",
+      "pass": true
+    },
+    {
+      "test": "Pointer port wiring connects operators",
+      "pass": true
+    },
+    {
+      "test": "Geometry spreadsheet shows cooked point data",
+      "pass": true
+    },
+    {
+      "test": "Performance pane exposes genuine cook statistics",
+      "pass": true
+    },
+    {
+      "test": "Orthographic camera view changes projection",
+      "pass": true
+    },
+    {
+      "test": "Shading selector changes active renderer mode",
+      "pass": true
+    },
+    {
+      "test": "Viewport grid toggle updates render state",
+      "pass": true
+    },
+    {
+      "test": "Light theme switches the application theme",
+      "pass": true
+    },
+    {
+      "test": "Viewport transform gizmo commits a geometry transform",
+      "pass": true
+    },
+    {
+      "test": "Pointer orbit updates camera orientation",
+      "pass": true
+    },
+    {
+      "test": "OBJ file input imports editable geometry",
+      "pass": true
+    },
+    {
+      "test": "Project example opens a simulated cloth scene",
+      "pass": true
+    },
+    {
+      "test": "Timeline seeks and cooks simulated geometry",
+      "pass": true
+    },
+    {
+      "test": "Snapshot produces a valid PNG blob",
+      "pass": true
+    }
+  ],
+  "passed": 27,
+  "pageErrors": [],
+  "backend": "Software preview",
+  "secureContext": false,
+  "inline": true,
+  "viewport": {
+    "width": 1600,
+    "height": 1000
+  }
+}

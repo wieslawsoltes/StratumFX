@@ -1,0 +1,36 @@
+{
+  "name": "@stratum-fx/geometry",
+  "version": "0.1.0",
+  "description": "Typed-array meshes, procedural geometry, interchange and bounded simulation solvers.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./standalone": "./dist/standalone.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "types",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "keywords": [
+    "procedural",
+    "3d",
+    "webgpu",
+    "javascript",
+    "geometry"
+  ]
+}

@@ -1,0 +1,3 @@
+
+added 5 packages in 285ms
+All five archives installed offline; headless exports and cooked geometry passed. Controls DOM initialization is covered separately by the browser example.

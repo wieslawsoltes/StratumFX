@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "id": "acbf2829-648e-4a04-aecb-02273fecf0a7",
+  "title": "Continuum Sculpture",
+  "nodes": [
+    {
+      "id": "helix",
+      "type": "helix",
+      "name": "swept_helix",
+      "x": 70,
+      "y": 20,
+      "inputs": [],
+      "params": {
+        "radius": 1.8,
+        "height": 4,
+        "turns": 5.5,
+        "tube": 0.21,
+        "segments": 280,
+        "sides": 12
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "twist",
+      "type": "twist",
+      "name": "torsion_field",
+      "x": 70,
+      "y": 125,
+      "inputs": [
+        "helix"
+      ],
+      "params": {
+        "angle": 30,
+        "axis": "y"
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "noise",
+      "type": "noise",
+      "name": "surface_detail",
+      "x": 70,
+      "y": 230,
+      "inputs": [
+        "twist"
+      ],
+      "params": {
+        "amplitude": 0.06,
+        "frequency": 7,
+        "octaves": 3,
+        "seed": 5,
+        "axis": "normal",
+        "speed": 0
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "mat",
+      "type": "color",
+      "name": "satin_gold",
+      "x": 70,
+      "y": 335,
+      "inputs": [
+        "noise"
+      ],
+      "params": {
+        "color": "#c3a577",
+        "secondary": "#eee1bf",
+        "mode": "height",
+        "roughness": 0.32,
+        "metallic": 0.6
+      },
+      "keyframes": {},
+      "bypass": false
+    }
+  ],
+  "outputId": "mat",
+  "start": 1,
+  "end": 240,
+  "fps": 24
+}

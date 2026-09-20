@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "632cb4fc-deb7-400f-957a-39dfa3b1faaa",
+  "title": "Highland Study",
+  "nodes": [
+    {
+      "id": "terrain",
+      "type": "terrain",
+      "name": "highland_heightfield",
+      "x": 100,
+      "y": 30,
+      "inputs": [],
+      "params": {
+        "size": 14,
+        "resolution": 110,
+        "height": 5.4,
+        "frequency": 0.29,
+        "octaves": 5,
+        "seed": 83,
+        "island": false
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "mat",
+      "type": "color",
+      "name": "elevation_ramp",
+      "x": 100,
+      "y": 150,
+      "inputs": [
+        "terrain"
+      ],
+      "params": {
+        "color": "#243c42",
+        "secondary": "#cecaa8",
+        "mode": "height",
+        "roughness": 0.77,
+        "metallic": 0.05
+      },
+      "keyframes": {},
+      "bypass": false
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "name": "OUT_HIGHLANDS",
+      "x": 100,
+      "y": 270,
+      "inputs": [
+        "mat"
+      ],
+      "params": {},
+      "keyframes": {},
+      "bypass": false
+    }
+  ],
+  "outputId": "out",
+  "start": 1,
+  "end": 240,
+  "fps": 24
+}
