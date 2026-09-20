@@ -1,0 +1,12 @@
+test_epoch_timestamp_is_clamped_without_changing_source (release_test.ReleaseArchiveTests.test_epoch_timestamp_is_clamped_without_changing_source) ... ok
+test_future_timestamp_is_clamped (release_test.ReleaseArchiveTests.test_future_timestamp_is_clamped) ... ok
+test_private_and_transient_files_are_excluded (release_test.ReleaseArchiveTests.test_private_and_transient_files_are_excluded) ... ok
+test_site_archive_includes_download_but_never_itself (release_test.ReleaseArchiveTests.test_site_archive_includes_download_but_never_itself) ... ok
+test_source_archive_omits_nested_zip_files (release_test.ReleaseArchiveTests.test_source_archive_omits_nested_zip_files) ... ok
+test_symlinks_are_not_archived (release_test.ReleaseArchiveTests.test_symlinks_are_not_archived) ... ok
+test_unicode_paths_and_binary_contents_roundtrip (release_test.ReleaseArchiveTests.test_unicode_paths_and_binary_contents_roundtrip) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.016s
+
+OK

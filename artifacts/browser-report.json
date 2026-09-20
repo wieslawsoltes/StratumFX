@@ -112,8 +112,8 @@
   "passed": 27,
   "pageErrors": [],
   "backend": "Software preview",
-  "secureContext": false,
-  "inline": true,
+  "secureContext": true,
+  "inline": false,
   "viewport": {
     "width": 1600,
     "height": 1000
