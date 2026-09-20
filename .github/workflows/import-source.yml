@@ -1,0 +1,74 @@
+name: Import Stratum FX source
+on:
+  push:
+    branches: [main]
+    paths: ['.bootstrap/manifest.json']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore verified source archive
+        shell: python
+        run: |
+          import hashlib, io, json, lzma, pathlib, shutil, tarfile
+          root = pathlib.Path('.bootstrap')
+          manifest = json.loads((root / 'manifest.json').read_text())
+          payload = b''.join((root / name).read_bytes() for name in manifest['parts'])
+          assert hashlib.sha256(payload).hexdigest() == manifest['sha256'], 'Source checksum mismatch'
+          with tarfile.open(fileobj=io.BytesIO(lzma.decompress(payload)), mode='r:') as archive:
+              members = archive.getmembers()
+              assert len(members) == manifest['sourceFileCount']
+              for member in members:
+                  path = pathlib.PurePosixPath(member.name)
+                  assert member.isfile() and not path.is_absolute() and '..' not in path.parts
+                  assert path.parts[0] not in ('.git', '.github', '.bootstrap', '.data', 'node_modules')
+              archive.extractall('.', filter='data')
+          shutil.rmtree(root)
+          print('Restored 101 source files with verified SHA-256')
+      - name: Check and test source
+        run: |
+          npm run check | tee artifacts/syntax-check.txt
+          npm test | tee artifacts/node-tests.txt
+      - name: Install browser test tools
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Test editor and regenerate preview assets
+        env:
+          STRATUM_INLINE_TEST: '1'
+          STRATUM_TEST_SOFTWARE: '1'
+        run: |
+          python tests/browser-smoke.py | tee artifacts/browser-log.txt
+          cp artifacts/studio-preview.png site/studio-preview.png
+          cp artifacts/studio-preview.png dist/site/studio-preview.png
+          python tests/examples-smoke.py | tee artifacts/examples-log.txt
+      - name: Build distributable downloads and verify links
+        run: |
+          npm run pack:all | tee artifacts/package-build.txt
+          python scripts/release.py --site-download
+          python scripts/verify-site.py | tee artifacts/site-links.json
+      - name: Commit complete source and previews
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --all
+          git commit -m 'feat: add complete Stratum FX studio, libraries, backend and website'
+          git push origin HEAD:main
+      - name: Preserve validation results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-import-validation
+          path: artifacts/
+          retention-days: 14
